@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "OPSIDIAN-nbdev"
+  site-url: "https://panukorn17.github.io/OPSIDIAN-nbdev"
+  description: "design-by-morphing and bayesian optimisation framework"
+  repo-branch: main
+  repo-url: "https://github.com/panukorn17/OPSIDIAN-nbdev"
