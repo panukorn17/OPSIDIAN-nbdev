@@ -4,7 +4,11 @@
 __all__ = ['centres', 'get_spline_details', 'get_cartesian_coords', 'calculate_face_coords', 'generate_faces', 'add_spine',
            'sweep']
 
-# %% ../nbs/01_preprocess.ipynb 3
+# %% ../nbs/01_preprocess.ipynb 2
+import sys
+sys.path.append("..")
+
+# %% ../nbs/01_preprocess.ipynb 4
 import csv
 import FreeCAD as App
 import Part
@@ -12,7 +16,7 @@ import math
 from pathlib import Path
 from .utils import gradient_to_spline_angle
 
-# %% ../nbs/01_preprocess.ipynb 4
+# %% ../nbs/01_preprocess.ipynb 5
 centres = [(0, 0, 0), #plane 1
             (5.333, 0, -144.623), #plane 2
             (36.791, 0, -289.331), #plane 3
@@ -40,7 +44,7 @@ centres = [(0, 0, 0), #plane 1
             (4281.578, 0, 12.828), #plane 25
             (4375.87, 0, 17.209)] #plane 26
 
-# %% ../nbs/01_preprocess.ipynb 5
+# %% ../nbs/01_preprocess.ipynb 6
 def get_spline_details()->list: # List containing the spline details.
     "This function gets the spline details and calculates the angle of the spline at the plane in radians and degrees if the columns are not already present."
     spline_details = []
@@ -60,7 +64,7 @@ def get_spline_details()->list: # List containing the spline details.
 
     return spline_details
 
-# %% ../nbs/01_preprocess.ipynb 7
+# %% ../nbs/01_preprocess.ipynb 8
 def get_cartesian_coords(centre_coords:tuple, # Tuple containing the centre coordinates.
                          phi_rad:list, # List of phi angles in radians.
                          polar_radial_distance:list, # List of polar radial distances.
@@ -75,7 +79,7 @@ def get_cartesian_coords(centre_coords:tuple, # Tuple containing the centre coor
         cartesian_coords.append((x_global, y_global, z_global))
     return cartesian_coords
 
-# %% ../nbs/01_preprocess.ipynb 9
+# %% ../nbs/01_preprocess.ipynb 10
 def calculate_face_coords(baseline_factor:list, # List containing the baseline factors.
                           )->list: # List containing the coordinates of the faces of the tube.
     "This function calculates the coordinates of the faces of the tube using the baseline factors to determine the shape of the face."
@@ -102,7 +106,7 @@ def calculate_face_coords(baseline_factor:list, # List containing the baseline f
             faces_coordinates.append(cartesian_coords)
     return faces_coordinates
 
-# %% ../nbs/01_preprocess.ipynb 11
+# %% ../nbs/01_preprocess.ipynb 12
 def generate_faces(faces_coordinate: list, # List containing the coordinates of the faces of the tube.
                    )->list: # List containing the shapes of the faces.
     "This function generates faces in free cad using the calculated face coordinates."
@@ -125,7 +129,7 @@ def generate_faces(faces_coordinate: list, # List containing the coordinates of 
         face_shapes.append(obj)
     return face_shapes
 
-# %% ../nbs/01_preprocess.ipynb 13
+# %% ../nbs/01_preprocess.ipynb 14
 def add_spine()->Part.Shape: # Shape of the spine.
     "This function adds the spine to the freeCAD document."
     # create freeCAD points
@@ -144,7 +148,7 @@ def add_spine()->Part.Shape: # Shape of the spine.
 
     return obj
 
-# %% ../nbs/01_preprocess.ipynb 15
+# %% ../nbs/01_preprocess.ipynb 16
 def sweep(face_shapes: list, # List containing the shapes of the faces.
           spine: Part.Shape, # Shape of the spine.
           )->Part.Shape: # Shape of the sweep.
