@@ -7,4 +7,4 @@ jobs:
     steps: 
       - uses: fastai/workflows/nbdev-ci@master
         with:
-            version: '3.8.19'
+            version: '3.8'
